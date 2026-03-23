@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import google.generativeai as genai
+import google.genai as genai
 from dotenv import load_dotenv
 import os
 import input_guardrail
@@ -48,6 +48,7 @@ def generate():
             or classification.get("safety") == "unsafe"
         )
 
+    
         if is_blocked:
             history.append({"role": "assistant", "content": "Prompt has been blocked for the following reasons: "+';'.join(classification['reasons'])})
             return jsonify({
